@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/firstFragment"
+        android:icon="@drawable/add_home"
+        android:title="Crear Atracción"/>
+
+    <item
+        android:id="@+id/secondFragment"
+        android:icon="@drawable/assignment"
+        android:title="Control Turnos"/>
+
+    <item
+        android:id="@+id/thirdFragment"
+        android:icon="@drawable/add_a_photo"
+        android:title="Multimedia"/>
+</menu>
