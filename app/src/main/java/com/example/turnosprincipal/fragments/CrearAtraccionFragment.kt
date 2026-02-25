@@ -31,8 +31,6 @@ import io.ktor.http.contentType
 import kotlinx.coroutines.launch
 
 class CrearAtraccionFragment : Fragment() {
-
-    private lateinit var atrasCrearTurnos: ImageView
     private lateinit var editTextNAtraccion: EditText
     private lateinit var txtTiempoxPersona: TextView
     private lateinit var txtMinSeg: TextView
@@ -126,6 +124,7 @@ class CrearAtraccionFragment : Fragment() {
                 val nuevaAtraccion = Atraccion(
                     nombre = nombre,
                     tiempoXpersona = segundos,
+                    tiempoAcumulado = 0,
                     turnoActual = turno,
                     activa = true
                 )
