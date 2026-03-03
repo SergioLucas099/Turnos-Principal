@@ -1,9 +1,7 @@
 package com.example.turnosprincipal.model
 
-import android.annotation.SuppressLint
 import kotlinx.serialization.Serializable
 
-@SuppressLint("UnsafeOptInUsageError")
 @Serializable
 data class Multimedia(
     val _id: String? = null,

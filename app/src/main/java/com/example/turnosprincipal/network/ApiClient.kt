@@ -7,11 +7,18 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.client.plugins.websocket.*
 import io.ktor.websocket.*
 import io.ktor.client.engine.okhttp.OkHttp
+import kotlinx.serialization.json.Json
 
 object ApiClient {
 
     val client = HttpClient(OkHttp) {
-        install(ContentNegotiation) { json() }
+        install(ContentNegotiation) {
+            json(
+                Json {
+                    ignoreUnknownKeys = true
+                    isLenient = true
+                }
+            ) }
         install(WebSockets)
     }
 
