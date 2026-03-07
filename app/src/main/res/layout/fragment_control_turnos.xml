@@ -24,8 +24,9 @@
                 android:layout_centerInParent="true"/>
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:id="@+id/btnReinicioTurnos"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/outline_alarm_24"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"/>
@@ -33,11 +34,23 @@
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RevListaAtracciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/colorOutline"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/RevListaTurnos"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="20dp"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 

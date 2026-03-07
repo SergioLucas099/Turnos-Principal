@@ -10,5 +10,6 @@ data class Atraccion(
     val tiempoXpersona: Int,
     val tiempoAcumulado: Int,
     val turnoActual: String,
-    val activa: Boolean
+    val activa: Boolean,
+    var seleccionada: Boolean = false
 )
