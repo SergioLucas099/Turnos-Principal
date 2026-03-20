@@ -30,14 +30,6 @@
         android:text="Reinicio Automàtico: 09:45pm"
         android:textSize="15sp"/>
 
-    <TextView
-        android:id="@+id/txtMostrartiempoRes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="Tiempo Restante: 02h 13m 41s"
-        android:textSize="15sp"/>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

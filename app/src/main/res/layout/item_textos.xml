@@ -14,14 +14,14 @@
         android:padding="12dp">
 
         <TextView
-            android:id="@+id/txtNombre"
+            android:id="@+id/txtNombreTexto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/txtEstado"
+            android:id="@+id/txtEstadoTexto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14sp"
@@ -34,7 +34,7 @@
             android:layout_marginTop="8dp">
 
             <Button
-                android:id="@+id/btnActivar"
+                android:id="@+id/btnActivarTexto"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:backgroundTint="@color/green"/>
 
             <Button
-                android:id="@+id/btnEliminar"
+                android:id="@+id/btnEliminarTexto"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"

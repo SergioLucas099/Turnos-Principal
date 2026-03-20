@@ -10,7 +10,8 @@ data class Turnos (
     val numeroTurno: String,
     val numeroPersonas: Int,
     val telefono: String,
-    val tiempoEspera: Int,
+    val tiempoEspera: Int = 0,
+    val duracion: Int = 0,
     val estado: String,
     val fecha: String
 )

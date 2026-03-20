@@ -2,10 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/ContenidoAtraccion"
+    android:layout_width="match_parent"
     android:layout_height="180dp"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="@drawable/rounded_background_transp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -62,7 +63,7 @@
 
     <LinearLayout
         android:id="@+id/LYNombreAtraccion"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginBottom="30dp"
@@ -76,6 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Mano Del Artesano"
+            android:textAlignment="center"
             android:textSize="25dp"
             android:textStyle="bold"/>
 
@@ -115,6 +117,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_background_transp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -124,7 +127,8 @@
             android:id="@+id/TurnoFinalizado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/verde"
+            android:background="@drawable/rounded_background_transp"
+            android:backgroundTint="@color/verde"
             android:visibility="invisible">
 
             <TextView
@@ -137,10 +141,28 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/TurnoAprobado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background_transp"
+            android:backgroundTint="@color/verde"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aprobado"
+                android:textStyle="bold"
+                android:textAlignment="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/TurnoCancelado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/rojo"
+            android:background="@drawable/rounded_background_transp"
+            android:backgroundTint="@color/rojo"
             android:visibility="invisible">
 
             <TextView
@@ -156,13 +178,15 @@
             android:id="@+id/TurnoEspera"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/azul"
+            android:background="@drawable/rounded_background_transp"
+            android:backgroundTint="@color/azul"
             android:visibility="invisible">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="En Espera"
+                android:textSize="17dp"
                 android:textStyle="bold"
                 android:textAlignment="center"/>
 
