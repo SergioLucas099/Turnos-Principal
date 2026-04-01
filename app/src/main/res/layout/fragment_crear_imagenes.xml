@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.CrearImagenesFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -19,9 +20,56 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crear Imagenes"
+                android:text="Subir Imagenes"
                 android:textAlignment="center"
                 android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutNombreImagen"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Nombre Imagen"
+                app:startIconDrawable="@drawable/contextual_token_add"
+                app:boxStrokeColor="@color/green">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editTextNombreImagen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="textCapSentences"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnSeleccImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Seleccionar Imagen"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/btnSubirImagen"
+                android:layout_width="215dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/green"
+                android:text="Subir Imagen"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="15dp"/>
 
         </LinearLayout>
 

@@ -344,7 +344,7 @@ class ControlTurnosFragment : Fragment() {
 
                 ApiClient.client.webSocket(
                     method = io.ktor.http.HttpMethod.Get,
-                    host = "192.168.0.182",
+                    host = "192.168.2.109",
                     port = 8080,
                     path = "/ws/turnos"
                 ) {
