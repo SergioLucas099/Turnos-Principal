@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,8 +25,12 @@ class CrearTextoFragment : Fragment() {
 
     private lateinit var editTextNAtraccion: TextInputEditText
     private lateinit var btnSubirTexto: Button
+    private lateinit var btnSubirTextoAviso: Button
     private lateinit var RevTextos: RecyclerView
     private lateinit var adapter: TextosAdapter
+    private lateinit var editTextMensajeAvisoCrear: EditText
+    private lateinit var editText5MinutosAntes: EditText
+    private lateinit var editTextLlamandoTurista: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +45,11 @@ class CrearTextoFragment : Fragment() {
         )
 
         editTextNAtraccion = view.findViewById(R.id.editTextNAtraccion)
+        editTextMensajeAvisoCrear = view.findViewById(R.id.editTextMensajeAvisoCrear)
+        editText5MinutosAntes = view.findViewById(R.id.editText5MinutosAntes)
+        editTextLlamandoTurista = view.findViewById(R.id.editTextLlamandoTurista)
         btnSubirTexto = view.findViewById(R.id.btnSubirTexto)
+        btnSubirTextoAviso = view.findViewById(R.id.btnSubirTextoAviso)
         RevTextos = view.findViewById(R.id.RevTextos)
 
         // 🔥 Inicializar adapter correctamente
