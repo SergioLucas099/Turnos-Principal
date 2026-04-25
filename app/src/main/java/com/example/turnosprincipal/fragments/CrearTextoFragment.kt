@@ -1,6 +1,7 @@
 package com.example.turnosprincipal.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,9 +29,6 @@ class CrearTextoFragment : Fragment() {
     private lateinit var btnSubirTextoAviso: Button
     private lateinit var RevTextos: RecyclerView
     private lateinit var adapter: TextosAdapter
-    private lateinit var editTextMensajeAvisoCrear: EditText
-    private lateinit var editText5MinutosAntes: EditText
-    private lateinit var editTextLlamandoTurista: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +43,6 @@ class CrearTextoFragment : Fragment() {
         )
 
         editTextNAtraccion = view.findViewById(R.id.editTextNAtraccion)
-        editTextMensajeAvisoCrear = view.findViewById(R.id.editTextMensajeAvisoCrear)
-        editText5MinutosAntes = view.findViewById(R.id.editText5MinutosAntes)
-        editTextLlamandoTurista = view.findViewById(R.id.editTextLlamandoTurista)
         btnSubirTexto = view.findViewById(R.id.btnSubirTexto)
         btnSubirTextoAviso = view.findViewById(R.id.btnSubirTextoAviso)
         RevTextos = view.findViewById(R.id.RevTextos)
@@ -60,7 +55,10 @@ class CrearTextoFragment : Fragment() {
         )
 
         RevTextos.adapter = adapter
-        RevTextos.layoutManager = LinearLayoutManager(requireContext())
+        RevTextos.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL,
+            false)
 
         btnSubirTexto.setOnClickListener {
 
@@ -74,13 +72,11 @@ class CrearTextoFragment : Fragment() {
             subirTexto(texto)
         }
 
-        // 🔥 Cargar datos al iniciar
         obtenerTextos()
 
         return view
     }
 
-    // 🚀 SUBIR TEXTO
     private fun subirTexto(texto: String) {
 
         lifecycleScope.launch {
@@ -92,7 +88,9 @@ class CrearTextoFragment : Fragment() {
                     activo = true
                 )
 
-                ApiClient.client.post("${ApiClient.BASE_URL}/textos") {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
+                ApiClient.client.post("${baseUrl}/textos") {
                     contentType(io.ktor.http.ContentType.Application.Json)
                     setBody(nuevoTexto)
                 }
@@ -118,9 +116,12 @@ class CrearTextoFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
-
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val lista: List<TextoGuardado> =
-                    ApiClient.client.get("${ApiClient.BASE_URL}/textos").body()
+                    ApiClient.client.get("${baseUrl}/textos").body()
+                Log.d("API", "TEXTOS: ${lista.size}")
+                Log.d("API", "DATOS: $lista")
 
                 adapter.actualizarLista(lista) // ✅ CORREGIDO
 
@@ -136,9 +137,10 @@ class CrearTextoFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
-
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 ApiClient.client.put(
-                    "${ApiClient.BASE_URL}/textos/${texto._id}/activar"
+                    "${baseUrl}/textos/${texto._id}/activar"
                 )
 
                 obtenerTextos()
@@ -154,9 +156,10 @@ class CrearTextoFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
-
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 ApiClient.client.delete(
-                    "${ApiClient.BASE_URL}/textos/${texto._id}"
+                    "${baseUrl}/textos/${texto._id}"
                 )
 
                 obtenerTextos()

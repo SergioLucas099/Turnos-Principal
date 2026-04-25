@@ -12,10 +12,13 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.lifecycleScope
 import com.example.turnosprincipal.R
+import com.example.turnosprincipal.model.Multimedia
 import com.example.turnosprincipal.network.ApiClient
 import com.google.android.material.textfield.TextInputEditText
+import io.ktor.client.call.body
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.forms.submitFormWithBinaryData
+import io.ktor.client.request.get
 import io.ktor.http.Headers
 import io.ktor.http.HttpHeaders
 import kotlinx.coroutines.launch
@@ -63,6 +66,7 @@ class CrearImagenesFragment : Fragment() {
             }
 
             subirImagen(nombre)
+            cargarImagenes()
         }
 
         return view
@@ -86,9 +90,11 @@ class CrearImagenesFragment : Fragment() {
                     requireContext().contentResolver.openInputStream(imageUri!!)
 
                 val bytes = inputStream!!.readBytes()
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
 
                 ApiClient.client.submitFormWithBinaryData(
-                    url = "${ApiClient.BASE_URL}/multimedia/upload",
+                    url = "${baseUrl}/multimedia/upload",
                     formData = formData {
 
                         append("nombre", nombre)
@@ -116,6 +122,22 @@ class CrearImagenesFragment : Fragment() {
                 editTextNombreImagen.setText("")
                 imageUri = null
 
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun cargarImagenes() {
+        lifecycleScope.launch {
+            try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
+
+                val lista: List<Multimedia> =
+                    ApiClient.client.get("$baseUrl/multimedia").body()
+
+                // actualizar adapter (igual que videos)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

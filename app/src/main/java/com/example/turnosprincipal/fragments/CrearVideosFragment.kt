@@ -145,8 +145,10 @@ class CrearVideosFragment : Fragment() {
                     return@launch
                 }
 
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 ApiClient.client.submitFormWithBinaryData(
-                    url = "${ApiClient.BASE_URL}/multimedia/upload",
+                    url = "${baseUrl}/multimedia/upload",
                     formData = formData {
 
                         // 🔹 Archivo
@@ -204,10 +206,11 @@ class CrearVideosFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
-
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val lista: List<Multimedia> =
                     ApiClient.client.get(
-                        "${ApiClient.BASE_URL}/multimedia"
+                        "${baseUrl}/multimedia"
                     ).body()
 
                 adapter.actualizarLista(lista)
@@ -228,8 +231,10 @@ class CrearVideosFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val response = ApiClient.client.put(
-                    "${ApiClient.BASE_URL}/multimedia/${video._id}/activar"
+                    "${baseUrl}/multimedia/${video._id}/activar"
                 )
                 println("ACTIVANDO ID: ${video._id}")
                 println("STATUS ACTIVAR: ${response.status}")
@@ -258,8 +263,10 @@ class CrearVideosFragment : Fragment() {
 
                 lifecycleScope.launch {
                     try {
+                        val baseUrl = ApiClient.BASE_URL
+                            ?: ApiClient.getBaseUrl(requireContext())
                         val response = ApiClient.client.delete(
-                            "${ApiClient.BASE_URL}/multimedia/${video._id}"
+                            "${baseUrl}/multimedia/${video._id}"
                         )
 
                         println("ELIMINANDO ID: ${video._id}")

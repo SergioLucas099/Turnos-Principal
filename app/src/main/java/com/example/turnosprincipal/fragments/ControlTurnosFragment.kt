@@ -83,9 +83,10 @@ class ControlTurnosFragment : Fragment() {
                         lifecycleScope.launch {
 
                             try {
-
+                                val baseUrl = ApiClient.BASE_URL
+                                    ?: ApiClient.getBaseUrl(requireContext())
                                 val response = ApiClient.client.post(
-                                    "${ApiClient.BASE_URL}/turnos/reiniciar"
+                                    "${baseUrl}/turnos/reiniciar"
                                 )
 
                                 Toast.makeText(
@@ -161,8 +162,9 @@ class ControlTurnosFragment : Fragment() {
                 lifecycleScope.launch {
 
                     try {
-
-                        val response = ApiClient.client.post("${ApiClient.BASE_URL}/turnos/programarReinicio") {
+                        val baseUrl = ApiClient.BASE_URL
+                            ?: ApiClient.getBaseUrl(requireContext())
+                        val response = ApiClient.client.post("${baseUrl}/turnos/programarReinicio") {
 
                             contentType(io.ktor.http.ContentType.Application.Json)
 
@@ -241,8 +243,10 @@ class ControlTurnosFragment : Fragment() {
     private fun cargarAtracciones() {
         lifecycleScope.launch {
             try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val lista: List<Atraccion> =
-                    ApiClient.client.get("${ApiClient.BASE_URL}/atracciones")
+                    ApiClient.client.get("${baseUrl}/atracciones")
                         .body()
                 adapterAtraccion.actualizarLista(lista)
 
@@ -255,8 +259,10 @@ class ControlTurnosFragment : Fragment() {
     private fun actualizarAtracciones(atraccion: Atraccion) {
         lifecycleScope.launch {
             try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val lista: List<Atraccion> =
-                    ApiClient.client.get("${ApiClient.BASE_URL}/atracciones")
+                    ApiClient.client.get("${baseUrl}/atracciones")
                         .body()
                 adapterAtraccion.actualizarLista(lista)
             } catch (e: Exception) {
@@ -268,9 +274,11 @@ class ControlTurnosFragment : Fragment() {
     private fun cargarTurnos() {
         lifecycleScope.launch {
             try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val lista: List<Turnos> =
                     ApiClient.client
-                        .get("${ApiClient.BASE_URL}/turnos")
+                        .get("${baseUrl}/turnos")
                         .body()
 
                 val listaFiltrada = if(nombreAtraccion.isEmpty()){
@@ -292,7 +300,9 @@ class ControlTurnosFragment : Fragment() {
     private fun actualizarTurnos(turnos: Turnos){
         lifecycleScope.launch {
             try {
-                ApiClient.client.put("${ApiClient.BASE_URL}/turno/${turnos._id}") {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
+                ApiClient.client.put("${baseUrl}/turno/${turnos._id}") {
                     contentType(io.ktor.http.ContentType.Application.Json)
                     setBody(turnos)
                 }
@@ -306,10 +316,11 @@ class ControlTurnosFragment : Fragment() {
     private suspend fun obtenerReinicioAutomatico(): String {
 
         return try {
-
+            val baseUrl = ApiClient.BASE_URL
+                ?: ApiClient.getBaseUrl(requireContext())
             val config: ConfiguracionReinicioResponse =
                 ApiClient.client
-                    .get("${ApiClient.BASE_URL}/turnos/configuracionReinicio")
+                    .get("${baseUrl}/turnos/configuracionReinicio")
                     .body()
 
             if (config.hora == 0 && config.minuto == 0) {
@@ -325,8 +336,10 @@ class ControlTurnosFragment : Fragment() {
             if (hora == 0) hora = 12
 
             val horaTexto = String.format("%02d:%02d %s", hora, minuto, periodo)
+            Log.d("API", "CONFIG REINICIO: hora=${config.hora}, minuto=${config.minuto}")
 
             "Reinicio automático: $horaTexto"
+
 
         } catch (e: Exception) {
 
@@ -344,7 +357,7 @@ class ControlTurnosFragment : Fragment() {
 
                 ApiClient.client.webSocket(
                     method = io.ktor.http.HttpMethod.Get,
-                    host = "192.168.2.116",
+                    host = "192.168.2.107",
                     port = 8080,
                     path = "/ws/turnos"
                 ) {

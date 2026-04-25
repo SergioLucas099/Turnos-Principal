@@ -2,6 +2,7 @@ package com.example.turnosprincipal.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,10 @@ class CrearAtraccionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launch {
+            ApiClient.getBaseUrl(requireContext())
+        }
 
         editTextNAtraccion = view.findViewById(R.id.editTextNAtraccion)
         btnSubirInfo = view.findViewById(R.id.btnSubirInfo)
@@ -129,8 +134,11 @@ class CrearAtraccionFragment : Fragment() {
                     activa = true
                 )
 
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
+
                 val atraccionCreada: Atraccion =
-                    ApiClient.client.post("${ApiClient.BASE_URL}/atracciones") {
+                    ApiClient.client.post("${baseUrl}/atracciones") {
                         contentType(io.ktor.http.ContentType.Application.Json)
                         setBody(nuevaAtraccion)
                     }.body()
@@ -163,8 +171,10 @@ class CrearAtraccionFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
                 val lista: List<Atraccion> =
-                    ApiClient.client.get("${ApiClient.BASE_URL}/atracciones")
+                    ApiClient.client.get("${baseUrl}/atracciones")
                         .body()
 
                 adapter.actualizarLista(lista)
@@ -180,8 +190,9 @@ class CrearAtraccionFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
-
-                ApiClient.client.delete("${ApiClient.BASE_URL}/atracciones/${atraccion._id}")
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
+                ApiClient.client.delete("${baseUrl}/atracciones/${atraccion._id}")
 
                 adapter.eliminarLocal(atraccion)
 
@@ -202,8 +213,10 @@ class CrearAtraccionFragment : Fragment() {
         lifecycleScope.launch {
 
             try {
+                val baseUrl = ApiClient.BASE_URL
+                    ?: ApiClient.getBaseUrl(requireContext())
 
-                ApiClient.client.put("${ApiClient.BASE_URL}/atracciones/${atraccion._id}") {
+                ApiClient.client.put("$baseUrl/atracciones/${atraccion._id}") {
                     contentType(io.ktor.http.ContentType.Application.Json)
                     setBody(atraccion)
                 }
